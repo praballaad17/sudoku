@@ -8,7 +8,7 @@ export const CONSTANT = {
         'Medium',
         'Hard'
     ],
-    LEVEL: [5, 47, 65]
+    LEVEL: [20, 47, 65]
 }
 export const ROUTE = {
     BOARD: "/board",
