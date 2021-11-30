@@ -49,20 +49,30 @@ export default function EffectProvider({ children }) {
         for (let row = 0; row < CONSTANT.BOX_SIZE; row++) {
             for (let col = 0; col < CONSTANT.BOX_SIZE; col++) {
                 const cellB = selectCell(row + box_row, col + box_col)
-                if (cellB.innerHTML === value) {
-                    cellB.classList.add('.err')
+                console.log(row + box_row, col + box_col, cellB.innerHTML, value)
+                if (cellB.innerHTML == value) {
+                    cellB.classList.add('err')
                 };
             }
         }
     }
-    const removeErr = ({ row, col }) => {
+    const removeErr = ({ row: indexR, col: indexC }) => {
+        let box_row = indexR - indexR % 3, box_col = indexC - indexC % 3
         for (let i = 0; i < 9; i++) {
-            const cellR = selectCell(row, i)
-            const cellC = selectCell(i, col)
-            const cell = selectCell(row, col)
+            const cellR = selectCell(indexR, i)
+            const cellC = selectCell(i, indexC)
+            const cell = selectCell(indexR, indexC)
             if (cellR.classList.contains('err') || cellC.classList.contains('err')) {
                 cellR.classList.remove('err')
                 cellC.classList.remove('err')
+            }
+            for (let row = 0; row < CONSTANT.BOX_SIZE; row++) {
+                for (let col = 0; col < CONSTANT.BOX_SIZE; col++) {
+                    const cellB = selectCell(row + box_row, col + box_col)
+                    if (cellB.classList.contains('err')) {
+                        cellB.classList.remove('err')
+                    };
+                }
             }
         }
         return false
